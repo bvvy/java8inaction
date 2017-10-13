@@ -1,5 +1,6 @@
 package org.bvvy.stream;
 
+import com.sun.org.apache.xml.internal.security.Init;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -8,22 +9,7 @@ import java.util.*;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
-public class BasicTest {
-    private List<Dish> dishes = null;
-    private Map<String, Dish> dishMap = new HashMap<>();
-
-
-    @Before
-    public void init() {
-        dishes = new ArrayList<>();
-        dishes.add(new Dish().withCalories(100).withName("apple"));
-        dishes.add(new Dish().withCalories(85).withName("pear"));
-        dishes.add(new Dish().withCalories(170).withName("candy"));
-        dishes.add(new Dish().withCalories(101).withName("orange"));
-        dishes.add(new Dish().withCalories(200).withName("watermelon"));
-
-        dishes.forEach(dish -> dishMap.put(dish.getName(), dish));
-    }
+public class BasicTest extends InitInfoTest{
 
     @Test
     public void testFilter() {
@@ -54,7 +40,10 @@ public class BasicTest {
     @Test
     public void testDistinct() {
         List<Integer> numbers = Arrays.asList(1, 2, 1, 3, 3, 2, 4);
-        numbers.stream().filter(i -> i % 2 == 0).distinct().forEach(System.out::println);
+        numbers.stream()
+                .filter(i -> i % 2 == 0)
+                .distinct()
+                .forEach(System.out::println);
     }
 
     @Test
